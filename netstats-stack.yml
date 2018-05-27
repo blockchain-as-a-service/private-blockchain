@@ -1,0 +1,35 @@
+version: "3.4"
+services:
+  netstats:
+    image: rsjelastic/eth-netstats
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "3000:3000"
+    environment:
+      - WS_SECRET=MY_SECRET
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - boot_blockchain-net
+
+  intelligence:
+    image: rsjelastic/eth-net-intelligence-api
+    command: /bin/bash -c "pm2 start app.json; while (true); do echo sleep; sleep 2s; done;"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    volumes:
+      - ~/private-blockchain/eth-net-intelligence-api/app.json:/eth-net-intelligence-api/app.json
+    networks:
+      - boot_blockchain-net
+volumes:
+  data:
+networks:
+  boot_blockchain-net:
+    external: true
