@@ -19,7 +19,7 @@ services:
 
   intelligence:
     image: rsjelastic/eth-net-intelligence-api
-    command: /bin/bash -c "pm2 start app.json; while (true); do echo sleep; sleep 2s; done;"
+    command: /bin/bash -c "pm2 start app.json; while (true); do sleep 2h; done;"
     deploy:
       placement:
         constraints:
