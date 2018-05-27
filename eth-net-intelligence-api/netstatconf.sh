@@ -3,12 +3,15 @@
 
 # sets up a eth-net-intelligence app.json for a local ethereum network cluster of nodes
 # - <number_of_nodes> is the number of clusters
+# - <ws_server> is the eth-netstats server
 # - <ws_secret> is the eth-netstats secret
 # - <node_name> is the node name
 # - <rpc_host> is private IP of the node name 
 
 
 N=$1
+shift
+ws_server=$1
 shift
 ws_secret=$1
 shift
